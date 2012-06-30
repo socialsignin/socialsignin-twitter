@@ -6,11 +6,14 @@ import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TwitterProviderService extends AbstractProviderService<Twitter> {
+public class TwitterProviderService extends AbstractProviderService<Twitter,TwitterProviderConfig> {
 
-	@Override
-	public Class<Twitter> getApiClass() {
-		return Twitter.class;
+	public TwitterProviderService() {
+		super();
+	}
+
+	public TwitterProviderService(TwitterProviderConfig providerConfig) {
+		super(providerConfig);
 	}
 
 	@Override

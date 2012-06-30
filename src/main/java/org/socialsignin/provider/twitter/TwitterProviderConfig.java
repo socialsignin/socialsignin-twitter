@@ -16,12 +16,17 @@
 package org.socialsignin.provider.twitter;
 
 import org.socialsignin.provider.AbstractProviderConfig;
+import org.socialsignin.springsocial.security.TwitterConnectInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.social.connect.ConnectionFactory;
+import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.connect.UsersConnectionRepository;
+import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ConnectInterceptor;
 import org.springframework.social.twitter.api.Twitter;
+import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 
 /** 
@@ -30,7 +35,7 @@ import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 @Configuration
 public class TwitterProviderConfig extends AbstractProviderConfig<Twitter> {
 
-	@Autowired
+	@Autowired(required=false)
 	private TwitterConnectInterceptor twitterConnectInterceptor;
 
 	@Value("${twitter.consumerKey}")
@@ -38,6 +43,54 @@ public class TwitterProviderConfig extends AbstractProviderConfig<Twitter> {
 
 	@Value("${twitter.consumerSecret}")
 	private String twitterConsumerSecret;
+	
+	public TwitterProviderConfig() {
+		super();
+	}
+	
+	public TwitterProviderConfig(String twitterConsumerKey,
+			Twitter authenticatedApi) {
+		super(authenticatedApi);
+		this.twitterConsumerKey = twitterConsumerKey;
+	}
+	
+	public TwitterProviderConfig(String twitterConsumerKey,String twitterConsumerSecret,String accessToken,String accessTokenSecret) {
+		super(new TwitterTemplate(twitterConsumerKey,twitterConsumerSecret,accessToken,accessTokenSecret));
+		this.twitterConsumerKey = twitterConsumerKey;
+		this.twitterConsumerSecret = twitterConsumerSecret;
+	}
+	
+	public TwitterProviderConfig(String twitterConsumerKey,String twitterConsumerSecret,ConnectionRepository connectionRepository,
+			ConnectionFactoryRegistry connectionFactoryRegistry) {
+		super(connectionRepository, connectionFactoryRegistry);
+		this.twitterConsumerSecret = twitterConsumerSecret;
+		this.twitterConsumerSecret  = twitterConsumerSecret;
+	}
+
+	public TwitterProviderConfig(String twitterConsumerKey,String twitterConsumerSecret,ConnectionRepository connectionRepository,
+			UsersConnectionRepository usersConnectionRepository,
+			ConnectionFactoryRegistry connectionFactoryRegistry) {
+		super(connectionRepository, usersConnectionRepository,
+				connectionFactoryRegistry);
+		this.twitterConsumerKey = twitterConsumerSecret;
+		this.twitterConsumerSecret  = twitterConsumerSecret;
+	}
+	
+	public TwitterProviderConfig(String twitterConsumerKey,String twitterConsumerSecret,String userId,	UsersConnectionRepository usersConnectionRepository,
+			ConnectionFactoryRegistry connectionFactoryRegistry) {
+		super(userId,usersConnectionRepository,
+				connectionFactoryRegistry);
+		this.twitterConsumerKey = twitterConsumerKey;
+		this.twitterConsumerSecret  = twitterConsumerSecret;
+	}
+
+	public void setTwitterConsumerKey(String twitterConsumerKey) {
+		this.twitterConsumerKey = twitterConsumerKey;
+	}
+
+	public void setTwitterConsumerSecret(String twitterConsumerSecret) {
+		this.twitterConsumerSecret = twitterConsumerSecret;
+	}
 
 	@Override
 	protected ConnectionFactory<Twitter> createConnectionFactory() {
@@ -48,6 +101,11 @@ public class TwitterProviderConfig extends AbstractProviderConfig<Twitter> {
 	@Override
 	protected ConnectInterceptor<Twitter> getConnectInterceptor() {
 		return twitterConnectInterceptor;
+	}
+
+	@Override
+	public Class<Twitter> getApiClass() {
+		return Twitter.class;
 	}
 
 }
