@@ -4,6 +4,21 @@
 Add this module to your classpath and component scan to auto-register and configure spring-social-twitter for your
 application.
 ```
+  <repository>
+        <id>opensourceagility-snapshots</id>
+        <url>http://repo.opensourceagility.com/snapshots </url>
+    </repository>
+...
+    <dependencies>
+        ...
+        <dependency>
+        <groupId>org.socialsignin</groupId>
+            <artifactId>socialsignin-twitter</artifactId>
+            <version>1.0.2-SNAPSHOT</version>
+        </dependency>
+        ...
+```
+```
     <context:component-scan
                 base-package="org.socialsignin.provider" />
 ```
