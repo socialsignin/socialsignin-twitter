@@ -24,7 +24,7 @@ application.
 ```
 
 As well as configuring the TwitterConnectionFactory and registering with the ConnectionFactoryRegistry,
-this component scan also makes a <a href="https://github.com/socialsignin/socialsignin-twitter/blob/master/src/main/java/org/socialsignin/provider/twitter/TwitterProviderService.java">TwitterProviderService</a> available as a bean in your application. This service
+this component scan also makes a <a href="https://github.com/socialsignin/socialsignin-provider/blob/master/src/main/java/org/socialsignin/provider/ProviderService.java">ProviderService<Twitter></a> implementation available as a bean in your application. This service
 can be used by your application to obtain Twitter API Clients for common use cases without needing to work with
 the Connection api of Spring Social directly.
 
