@@ -1,5 +1,7 @@
-<a href="https://github.com/socialsignin/socialsignin-provider">SocialSignin Provider Module</a> for <a href="https://github.com/SpringSource/spring-social-twitter">Spring-Social-Twitter</a>
+<a href="https://github.com/socialsignin/socialsignin-provider">SocialSignin Provider Module</a> for <a href="https://github.com/michaellavelle/spring-social-twitter">Spring-Social-Twitter</a>
 ======================================================
+
+See <a href="https://github.com/socialsignin/socialsignin-showcase">socialsignin-showcase</a> for an example of this module in use.
 
 Add this module to your classpath and component scan to auto-register and configure spring-social-twitter for your
 application.
@@ -24,9 +26,19 @@ application.
 ```
 
 As well as configuring the TwitterConnectionFactory and registering with the ConnectionFactoryRegistry,
-this component scan also makes a <a href="https://github.com/socialsignin/socialsignin-provider/blob/master/src/main/java/org/socialsignin/provider/ProviderService.java">ProviderService<Twitter></a> implementation available as a bean in your application. This service
+this component scan also makes a <a href="https://github.com/socialsignin/socialsignin-provider/blob/master/src/main/java/org/socialsignin/provider/ProviderService.java">ProviderService&lt;Twitter&gt;</a> implementation available as a bean in your application. This service
 can be used by your application to obtain Twitter API Clients for common use cases without needing to work with
-the Connection api of Spring Social directly.
+the Connection api of Spring Social directly:
+
+```
+public class YourService
+{
+  @Autowired
+  private TwitterProviderService soundCloudProviderService;
+  ...
+
+}
+```
 
 Prerequesites/Setup
 -------------------
@@ -50,3 +62,4 @@ access to Twitter API Client directly for common use cases, reducing need for de
 automatically be registered with the ConnectInterceptorList for easy injection into ConnectController.
 - Quickstart implementations of UsersConnectionRepostory/ConnectionRepository to help developers get up and running
 using Spring-Social without needing to set up databases in the first instance.
+
