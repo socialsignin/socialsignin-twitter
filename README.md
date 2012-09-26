@@ -23,11 +23,25 @@ application.
                 base-package="org.socialsignin.provider" />
 ```
 
+As well as configuring the TwitterConnectionFactory and registering with the ConnectionFactoryRegistry,
+this component scan also makes a <a href="https://github.com/socialsignin/socialsignin-twitter/blob/master/src/main/java/org/socialsignin/provider/twitter/TwitterProviderService.java">TwitterProviderService</a> available as a bean in your application. This service
+can be used by your application to obtain Twitter API Clients for common use cases without needing to work with
+the Connection api of Spring Social directly.
+
+Prerequesites/Setup
+-------------------
+
 Requires Spring Social's ConnectionFactoryRegistry, a UsersConnectionRepository and a ConnectionRepository (associated with the authenticated user) to exist as beans in your application context.
 
 When using the default component scan to register this Twitter module, the following properties must be set in your application:
+```
+twitter.consumerKey=
+twitter.consumerSecret=
+```
+
 
 Module Features
+---------------
 
 - Auto-configuration and registration of TwitterConnectionFactory based on properties in your environment
 - Registers a TwitterProviderService bean - this component can be injected into your application's services and provides
