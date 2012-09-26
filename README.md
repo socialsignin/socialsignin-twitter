@@ -1,4 +1,4 @@
-<a href="https://github.com/socialsignin/socialsignin-provider">SocialSignin Provider</a> Module for <a href="https://github.com/SpringSource/spring-social-twitter">Spring-Social-Twitter</a>
+<a href="https://github.com/socialsignin/socialsignin-provider">SocialSignin Provider Module</a> for <a href="https://github.com/SpringSource/spring-social-twitter">Spring-Social-Twitter</a>
 ======================================================
 
 Add this module to your classpath and component scan to auto-register and configure spring-social-twitter for your
