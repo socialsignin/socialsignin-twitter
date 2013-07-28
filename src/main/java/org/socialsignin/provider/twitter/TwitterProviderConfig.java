@@ -37,53 +37,36 @@ public class TwitterProviderConfig extends AbstractProviderConfig<Twitter> {
 
 	@Autowired(required=false)
 	private TwitterConnectInterceptor twitterConnectInterceptor;
-
+	
 	@Value("${twitter.consumerKey}")
 	private String twitterConsumerKey;
 
 	@Value("${twitter.consumerSecret}")
 	private String twitterConsumerSecret;
-	
+
 	public TwitterProviderConfig() {
 		super();
 	}
 	
-	public TwitterProviderConfig(String twitterConsumerKey,
+	public TwitterConnectInterceptor getTwitterConnectInterceptor() {
+		return twitterConnectInterceptor;
+	}
+
+	public String getTwitterConsumerKey() {
+		return twitterConsumerKey;
+	}
+
+	public String getTwitterConsumerSecret() {
+		return twitterConsumerSecret;
+	}
+
+	public TwitterProviderConfig(String twitterConsumerKey,String twitterConsumerSecret,
 			Twitter authenticatedApi) {
 		super(authenticatedApi);
 		this.twitterConsumerKey = twitterConsumerKey;
-	}
-	
-	public TwitterProviderConfig(String twitterConsumerKey,String twitterConsumerSecret,String accessToken,String accessTokenSecret) {
-		super(new TwitterTemplate(twitterConsumerKey,twitterConsumerSecret,accessToken,accessTokenSecret));
-		this.twitterConsumerKey = twitterConsumerKey;
 		this.twitterConsumerSecret = twitterConsumerSecret;
 	}
 	
-	public TwitterProviderConfig(String twitterConsumerKey,String twitterConsumerSecret,ConnectionRepository connectionRepository,
-			ConnectionFactoryRegistry connectionFactoryRegistry) {
-		super(connectionRepository, connectionFactoryRegistry);
-		this.twitterConsumerSecret = twitterConsumerSecret;
-		this.twitterConsumerSecret  = twitterConsumerSecret;
-	}
-
-	public TwitterProviderConfig(String twitterConsumerKey,String twitterConsumerSecret,ConnectionRepository connectionRepository,
-			UsersConnectionRepository usersConnectionRepository,
-			ConnectionFactoryRegistry connectionFactoryRegistry) {
-		super(connectionRepository, usersConnectionRepository,
-				connectionFactoryRegistry);
-		this.twitterConsumerKey = twitterConsumerSecret;
-		this.twitterConsumerSecret  = twitterConsumerSecret;
-	}
-	
-	public TwitterProviderConfig(String twitterConsumerKey,String twitterConsumerSecret,String userId,	UsersConnectionRepository usersConnectionRepository,
-			ConnectionFactoryRegistry connectionFactoryRegistry) {
-		super(userId,usersConnectionRepository,
-				connectionFactoryRegistry);
-		this.twitterConsumerKey = twitterConsumerKey;
-		this.twitterConsumerSecret  = twitterConsumerSecret;
-	}
-
 	public void setTwitterConsumerKey(String twitterConsumerKey) {
 		this.twitterConsumerKey = twitterConsumerKey;
 	}
@@ -92,10 +75,33 @@ public class TwitterProviderConfig extends AbstractProviderConfig<Twitter> {
 		this.twitterConsumerSecret = twitterConsumerSecret;
 	}
 
-	@Override
-	protected ConnectionFactory<Twitter> createConnectionFactory() {
-		return new TwitterConnectionFactory(twitterConsumerKey,
-				twitterConsumerSecret);
+	
+	public TwitterProviderConfig(String twitterConsumerKey,String twitterConsumerSecret,String accessToken,String accessTokenSecret) {
+		super(new TwitterTemplate(twitterConsumerKey,twitterConsumerSecret,accessToken,accessTokenSecret));
+		this.twitterConsumerKey = twitterConsumerKey;
+		this.twitterConsumerSecret = twitterConsumerSecret;
+
+	}
+	
+	public TwitterProviderConfig(String twitterConsumerKey,String twitterConsumerSecret,ConnectionRepository connectionRepository) {
+		super(connectionRepository);
+		this.twitterConsumerKey = twitterConsumerKey;
+		this.twitterConsumerSecret = twitterConsumerSecret;
+	}
+
+	public TwitterProviderConfig(String twitterConsumerKey,String twitterConsumerSecret,ConnectionRepository connectionRepository,
+			UsersConnectionRepository usersConnectionRepository) {
+		super(connectionRepository, usersConnectionRepository);
+		this.twitterConsumerKey = twitterConsumerKey;
+		this.twitterConsumerSecret = twitterConsumerSecret;
+	}
+	
+	public TwitterProviderConfig(String twitterConsumerKey,String twitterConsumerSecret,String userId,	UsersConnectionRepository usersConnectionRepository,
+			ConnectionFactoryRegistry connectionFactoryRegistry) {
+		super(userId,usersConnectionRepository);
+		this.twitterConsumerKey = twitterConsumerKey;
+		this.twitterConsumerSecret = twitterConsumerSecret;
+
 	}
 
 	@Override

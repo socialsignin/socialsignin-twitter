@@ -20,12 +20,12 @@
 	<groupId>org.socialsignin</groupId>
 	<artifactId>socialsignin-twitter</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.1.0-SNAPSHOT</version>
 	<name>SocialSignIn Twitter Provider</name>
 	<properties>
-	   <org.socialsignin.provider.version>1.0.2-SNAPSHOT</org.socialsignin.provider.version>
-	   <org.springframework.social.twitter.version>1.0.2.RELEASE</org.springframework.social.twitter.version>
-	   <org.socialsignin.springsocial.security.version>1.0.2.RELEASE</org.socialsignin.springsocial.security.version>
+	   <org.socialsignin.provider.version>1.1.0-SNAPSHOT</org.socialsignin.provider.version>
+	   <org.springframework.social.twitter.version>1.1.0.M3</org.springframework.social.twitter.version>
+	   <org.socialsignin.springsocial.security.version>1.1.0-SNAPSHOT</org.socialsignin.springsocial.security.version>
 	   
 	</properties>
 	<distributionManagement>
@@ -47,8 +47,13 @@
 	        	<id>opensourceagility-releases</id>
 	        	<url>http://repo.opensourceagility.com/releases</url>
 	    	</repository>
+	    	 <repository>
+            <id>spring-maven-milestone</id>
+            <name>Spring Maven Milestone Repository</name>
+            <url>http://maven.springframework.org/milestone</url>
+        </repository>
 	</repositories>
-
+	   	
 	<dependencies>
 	<dependency>
 			<groupId>org.springframework.social</groupId>
